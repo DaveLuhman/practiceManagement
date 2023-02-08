@@ -1,0 +1,62 @@
+<div class="main-view">
+    {{#if message}}
+        <div class="alert">{{message}}</div>
+    {{/if}}
+    {{#if searchTerms}}
+        <h1 id="search-terms">Searched For: <br />{{searchTerms}}</h1>
+    {{/if}}
+    <table class="table overflow-visible ">
+        <thead>
+            <tr>
+                <th>Serial number</th>
+                <th class="hidden md:table-cell">Part Number</th>
+                <th>Barcode #</th>
+                <th class="hidden lg:table-cell">Description</th>
+                <th class="hidden md:table-cell">Status</th>
+                <th class="hidden md:table-cell">Service Assignment</th>
+                <th>Edit</th>
+            </tr>
+        </thead>
+        {{#if tools}}
+            <tbody>
+                {{#each tools}}
+                    {{#unless archived}}
+                        <tr>
+                            <td id="serialNumber">{{serialNumber}}</td>
+                            <td class="hidden md:table-cell" id="partNumber">{{partNumber}}</td>
+                            <td id="barcode">{{barcode}}</td>
+                            <td class="hidden lg:table-cell" id="description">{{description}}</td>
+                            <td class="hidden md:table-cell" id="status">{{status}}</td>
+                            <td class="hidden md:table-cell" id="serviceAssignment">{{serviceAssignment}}</td>
+                            <td><label class="rounded-badge btn-xs"><a href="/tool/{{id}}"><i
+                                            class="fa fa-pencil"></i></a></label></td>
+                        </tr>
+                    {{/unless}}
+                {{/each}}
+        {{/if}}
+        </tbody>
+    </table>
+</div>
+<br />
+{{#gt pagination.pageCount 1}}
+    <ul class="paginate-bar">
+        {{#paginate pagination type="first"}}
+            <div class="col-auto"><a href="?p={{n}}"><button class="btn-paginate">First</button></a></div>
+        {{/paginate}}
+        {{#paginate pagination type="previous"}}
+            <div class="col-auto"><a href="?p={{n}}"><button class="btn-paginate">Previous</button></a></div>
+        {{/paginate}}
+        {{#paginate pagination type="middle" limit="9"}}
+            <div class="{{#if active}}active{{/if}} col"><a href="?p={{n}}"><button
+                        class="btn-paginate">{{n}}</button></a>
+            </div>
+        {{/paginate}}
+        {{#paginate pagination type="next"}}
+            <div class="col-auto"><a href="?p={{n}}"><button class="btn-paginate">Next</button></a></div>
+        {{/paginate}}
+        {{#paginate pagination type="last"}}
+            <div class="col-auto"><a href="?p={{n}}"><button class="btn-paginate">Last</button></a></div>
+        {{/paginate}}
+    </ul>
+{{/gt}}
+</>
