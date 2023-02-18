@@ -19,10 +19,8 @@ import connectDB from './config/db.js'
 import passportConfig from './config/passport.js'
 import { rateLimiter } from './config/util.config.js'
 import { checkAuth, isManager } from './middleware/auth.js'
-import { dashboardRouter } from './routes/dashboard.routes.js'
 import { indexRouter } from './routes/index.routes.js'
 import { managerRouter } from './routes/manager.routes.js'
-import { toolRouter } from './routes/tool.routes.js'
 import { userRouter } from './routes/user.routes.js'
 dotenv.config()
 const MongoDBStore = connectMongoDBSession(session)
@@ -94,8 +92,6 @@ app.use('/', indexRouter)
 // Routes (User Context)
 app.use(checkAuth)
 app.use('/user', userRouter)
-app.use('/dashboard', dashboardRouter)
-app.use('/tool', toolRouter)
 app.use(isManager)
 app.use('/manager', managerRouter)
 // catch 404 and forward to error handler
